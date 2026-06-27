@@ -150,11 +150,12 @@
                 </form>
             </div>
 
-            <!-- Checkout Step 2: Overview (Summary) -->
-            <div id="checkout-step-two" class="checkout-card hidden">
+            <!-- Checkout Step 2: Overview & Payment Gateway -->
+            <div id="checkout-step-two" class="checkout-card payment-gateway-card hidden">
                 <div class="checkout-header">
-                    <h2>Order Overview</h2>
+                    <h2>Order & Payment</h2>
                 </div>
+                
                 <div class="overview-details">
                     <p class="overview-label">Item Total:</p>
                     <p id="overview-items-price">$0.00</p>
@@ -164,10 +165,48 @@
                     <p class="overview-label font-large">Grand Total:</p>
                     <p id="overview-grand-total" class="font-large font-glow">$0.00</p>
                 </div>
-                <div class="checkout-actions">
-                    <button type="button" class="btn btn-secondary" id="back-step-one-btn">Back</button>
-                    <button type="button" id="finish" class="btn btn-primary">Finish Order</button>
+
+                <!-- Dynamic Virtual Credit Card -->
+                <div class="virtual-card">
+                    <div class="card-chip"></div>
+                    <div class="card-brand" id="card-brand-display">VISA</div>
+                    <div class="card-number-display" id="card-num-display">4000 1234 5678 9010</div>
+                    <div class="card-holder-row">
+                        <div>
+                            <span class="card-label">CARDHOLDER</span>
+                            <div class="card-name-display" id="card-holder-display">JOHN DOE</div>
+                        </div>
+                        <div>
+                            <span class="card-label">EXPIRES</span>
+                            <div class="card-expiry-display" id="card-exp-display">12/29</div>
+                        </div>
+                    </div>
                 </div>
+
+                <!-- Payment Input Fields -->
+                <form id="payment-form" onsubmit="event.preventDefault();">
+                    <div class="input-group">
+                        <label for="card-number">Card Number</label>
+                        <input type="text" id="card-number" placeholder="4000 1234 5678 9010" value="4000 1234 5678 9010" maxlength="19" required>
+                    </div>
+                    <div class="input-row">
+                        <div class="input-group">
+                            <label for="card-expiry">Expiry Date</label>
+                            <input type="text" id="card-expiry" placeholder="MM/YY" value="12/29" maxlength="5" required>
+                        </div>
+                        <div class="input-group">
+                            <label for="card-cvv">CVV</label>
+                            <input type="password" id="card-cvv" placeholder="•••" value="123" maxlength="3" required>
+                        </div>
+                    </div>
+                    
+                    <div class="checkout-actions">
+                        <button type="button" class="btn btn-secondary" id="back-step-one-btn">Back</button>
+                        <button type="submit" id="finish" class="btn btn-primary">
+                            <span id="pay-btn-text">Pay & Finish Order</span>
+                        </button>
+                    </div>
+                </form>
             </div>
 
             <!-- Checkout Step 3: Success -->

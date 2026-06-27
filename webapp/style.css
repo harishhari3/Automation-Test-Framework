@@ -844,3 +844,120 @@ hr {
     50% { transform: translate(-1px, -1px); }
     100% { transform: translate(1px, -1px); }
 }
+
+/* PAYMENT GATEWAY WIDGET STYLING */
+.payment-gateway-card {
+    max-width: 480px !important;
+}
+
+.input-row {
+    display: flex;
+    gap: 1rem;
+}
+
+.input-row .input-group {
+    flex: 1;
+}
+
+.virtual-card {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.03));
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    padding: 1.5rem;
+    height: 180px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    margin-bottom: 2rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.virtual-card::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -20%;
+    width: 250px;
+    height: 250px;
+    background: radial-gradient(circle, rgba(0, 240, 255, 0.15) 0%, transparent 70%);
+    pointer-events: none;
+}
+
+.card-chip {
+    width: 38px;
+    height: 28px;
+    background: linear-gradient(135deg, #f0d060, #cc9933);
+    border-radius: 4px;
+    position: relative;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.card-chip::before {
+    content: '';
+    position: absolute;
+    top: 5px;
+    left: 8px;
+    width: 22px;
+    height: 18px;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 2px;
+}
+
+.card-brand {
+    position: absolute;
+    top: 1.25rem;
+    right: 1.5rem;
+    font-size: 1.2rem;
+    font-weight: 800;
+    letter-spacing: 2px;
+    font-style: italic;
+    color: var(--text-white);
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.3);
+}
+
+.card-number-display {
+    font-size: 1.3rem;
+    font-weight: 600;
+    letter-spacing: 3px;
+    font-family: 'Courier New', Courier, monospace;
+    color: var(--text-white);
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    margin: 1rem 0;
+}
+
+.card-holder-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.card-label {
+    display: block;
+    font-size: 0.6rem;
+    color: var(--text-muted);
+    letter-spacing: 1px;
+    margin-bottom: 0.2rem;
+    text-transform: uppercase;
+}
+
+.card-name-display {
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    max-width: 180px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.card-expiry-display {
+    font-size: 0.9rem;
+    font-weight: 600;
+    font-family: 'Courier New', Courier, monospace;
+}
+

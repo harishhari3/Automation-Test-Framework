@@ -304,23 +304,89 @@ function setupEventListeners() {
         overviewItemsPrice.innerText = `$${subtotal.toFixed(2)}`;
         overviewGrandTotal.innerText = `$${grandTotal.toFixed(2)}`;
 
+        // Prefill Cardholder display
+        const firstName = firstNameInput.value.trim();
+        const lastName = lastNameInput.value.trim();
+        document.getElementById('card-holder-display').innerText = `${firstName} ${lastName}`.toUpperCase();
+
         checkoutStepOne.classList.add('hidden');
         checkoutStepTwo.classList.remove('hidden');
     });
 
-    // Step 2 Back & Finish Buttons
+    // Step 2 Back Button
     document.getElementById('back-step-one-btn').addEventListener('click', () => {
         checkoutStepTwo.classList.add('hidden');
         checkoutStepOne.classList.remove('hidden');
     });
 
-    document.getElementById('finish').addEventListener('click', () => {
-        checkoutStepTwo.classList.add('hidden');
-        checkoutComplete.classList.remove('hidden');
+    // Card Input Formatters and Brand Detector
+    const cardNumInput = document.getElementById('card-number');
+    const cardExpInput = document.getElementById('card-expiry');
+    const cardCvvInput = document.getElementById('card-cvv');
+    const paymentForm = document.getElementById('payment-form');
+
+    cardNumInput.addEventListener('input', (e) => {
+        let value = e.target.value.replace(/\s+/g, '').replace(/[^0-9]/gi, '');
+        let formatted = '';
+        for (let i = 0; i < value.length; i++) {
+            if (i > 0 && i % 4 === 0) {
+                formatted += ' ';
+            }
+            formatted += value[i];
+        }
+        e.target.value = formatted;
+        document.getElementById('card-num-display').innerText = formatted || '•••• •••• •••• ••••';
         
-        cart = {};
-        updateCartUI();
-        renderProducts();
+        // Brand Detection
+        const brandDisplay = document.getElementById('card-brand-display');
+        if (value.startsWith('4')) {
+            brandDisplay.innerText = 'VISA';
+        } else if (value.startsWith('5')) {
+            brandDisplay.innerText = 'MASTERCARD';
+        } else if (value.startsWith('3')) {
+            brandDisplay.innerText = 'AMEX';
+        } else {
+            brandDisplay.innerText = 'COSMIC';
+        }
+    });
+
+    cardExpInput.addEventListener('input', (e) => {
+        let value = e.target.value.replace(/\s+/g, '').replace(/[^0-9]/gi, '');
+        if (value.length > 2) {
+            value = value.substring(0, 2) + '/' + value.substring(2, 4);
+        }
+        e.target.value = value;
+        document.getElementById('card-exp-display').innerText = value || 'MM/YY';
+    });
+
+    // Handle payment simulation submission
+    paymentForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        
+        const payBtnText = document.getElementById('pay-btn-text');
+        payBtnText.innerText = "Processing Payment...";
+        
+        const inputs = paymentForm.querySelectorAll('input, button');
+        inputs.forEach(input => input.disabled = true);
+        
+        setTimeout(() => {
+            payBtnText.innerText = "Pay & Finish Order";
+            inputs.forEach(input => input.disabled = false);
+            
+            // Clear payment inputs
+            cardNumInput.value = '';
+            cardExpInput.value = '';
+            cardCvvInput.value = '';
+            document.getElementById('card-num-display').innerText = '•••• •••• •••• ••••';
+            document.getElementById('card-exp-display').innerText = 'MM/YY';
+            
+            checkoutStepTwo.classList.add('hidden');
+            checkoutComplete.classList.remove('hidden');
+            
+            cart = {};
+            updateCartUI();
+            renderProducts();
+        }, 1200);
     });
 
     // Back to products from success screen
