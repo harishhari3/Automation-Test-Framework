@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cosmic Goods - Anime, DC & Marvel Accessories Store</title>
+    <meta name="description" content="Shop premium keychains, rings, pendants, and replica props from Marvel, DC, and your favorite Anime. Premium quality, neon style.">
+    <link rel="stylesheet" href="style.css">
+    <!-- Premium Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- 1. LOGIN SCREEN -->
+    <div id="login-container" class="login-page">
+        <div class="login-card">
+            <div class="login-header">
+                <div class="logo-glow">COSMIC GOODS</div>
+                <p>ACCESSORIES MULTIVERSE</p>
+            </div>
+            
+            <form id="login-form" onsubmit="event.preventDefault();">
+                <div class="input-group">
+                    <label for="user-name">Username</label>
+                    <input type="text" id="user-name" placeholder="Enter username" required>
+                </div>
+                <div class="input-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" placeholder="Enter password" required>
+                </div>
+                
+                <!-- Error message matching the expected Selenium element selector -->
+                <div id="error-message-container" class="error-container hidden">
+                    <h3 data-test="error" id="error-text"></h3>
+                </div>
+                
+                <button type="submit" id="login-button" class="btn btn-primary">Enter Multiverse</button>
+            </form>
+            
+            <div class="credentials-hint">
+                <p><strong>Demo Access:</strong> standard_user / secret_sauce</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 2. MAIN STOREFRONT (Hidden until login) -->
+    <div id="store-container" class="main-app hidden">
+        <header class="app-header">
+            <div class="header-left">
+                <button id="react-burger-menu-btn" class="menu-btn">
+                    <svg viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/></svg>
+                </button>
+                <h1 class="logo">COSMIC GOODS</h1>
+            </div>
+            <div class="header-right">
+                <a class="shopping_cart_link" id="cart-btn" href="javascript:void(0)">
+                    <svg viewBox="0 0 24 24" width="26" height="26"><path fill="currentColor" d="M17 18c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2zM7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zm0-3l1.1-2h7.45c.75 0 1.41-.41 1.75-1.03L21.7 4H5.21l-.94-2H1v2h2l3.6 7.59-1.35 2.44C4.52 15.37 5.48 17 7 17h12v-2H7z"/></svg>
+                    <!-- Cart Badge element lookups -->
+                    <span class="shopping_cart_badge hidden" id="cart-badge">0</span>
+                </a>
+            </div>
+        </header>
+
+        <!-- Sidebar Navigation Drawer -->
+        <div id="sidebar" class="sidebar-drawer hidden">
+            <div class="sidebar-header">
+                <h2>Navigation</h2>
+                <button id="close-sidebar-btn" class="close-btn">&times;</button>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="javascript:void(0)" class="active">Storefront</a>
+                <a href="javascript:void(0)" id="logout_sidebar_link">Logout</a>
+            </nav>
+        </div>
+
+        <main class="store-main">
+            <div class="store-subheader">
+                <h2 class="title">Products</h2>
+                
+                <div class="filter-controls">
+                    <!-- Category Filter Tabs -->
+                    <div class="category-filters">
+                        <button class="filter-tab active" data-category="all">All Universe</button>
+                        <button class="filter-tab" data-category="anime">Anime</button>
+                        <button class="filter-tab" data-category="marvel">Marvel</button>
+                        <button class="filter-tab" data-category="dc">DC</button>
+                    </div>
+
+                    <!-- Type Filter Tabs -->
+                    <div class="type-filters">
+                        <button class="type-tab active" data-type="all">All Items</button>
+                        <button class="type-tab" data-type="accessory">Accessories</button>
+                        <button class="type-tab" data-type="poster">Posters</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product Cards Grid -->
+            <div id="product-grid" class="product-grid">
+                <!-- Dynamic Products will be rendered here by app.js -->
+            </div>
+        </main>
+
+        <!-- 3. CART DRAWER (Slide-out from right) -->
+        <div id="cart-drawer" class="cart-drawer hidden">
+            <div class="cart-header">
+                <h2>Your Space Cart</h2>
+                <button id="close-cart-btn" class="close-btn">&times;</button>
+            </div>
+            <div class="cart-content">
+                <div id="cart-items-list" class="cart-items-list">
+                    <p class="empty-cart-msg">Your cart is floating in empty space...</p>
+                </div>
+            </div>
+            <div class="cart-footer">
+                <div class="cart-total">
+                    <span>Total:</span>
+                    <span id="cart-total-price">$0.00</span>
+                </div>
+                <button id="checkout" class="btn btn-primary btn-block">Proceed to Checkout</button>
+            </div>
+        </div>
+
+        <!-- 4. CHECKOUT OVERLAY (Step 1: Info & Step 2: Overview & Step 3: Success) -->
+        <div id="checkout-overlay" class="overlay hidden">
+            <!-- Checkout Step 1: Info -->
+            <div id="checkout-step-one" class="checkout-card">
+                <div class="checkout-header">
+                    <h2>Checkout Information</h2>
+                    <button class="close-btn" onclick="document.getElementById('checkout-overlay').classList.add('hidden')">&times;</button>
+                </div>
+                <form id="checkout-form" onsubmit="event.preventDefault();">
+                    <div class="input-group">
+                        <label for="first-name">First Name</label>
+                        <input type="text" id="first-name" placeholder="Enter first name" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="last-name">Last Name</label>
+                        <input type="text" id="last-name" placeholder="Enter last name" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="postal-code">Zip/Postal Code</label>
+                        <input type="text" id="postal-code" placeholder="Enter zip code" required>
+                    </div>
+                    <div class="checkout-actions">
+                        <button type="button" class="btn btn-secondary" onclick="document.getElementById('checkout-overlay').classList.add('hidden')">Cancel</button>
+                        <button type="submit" id="continue" class="btn btn-primary">Continue</button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Checkout Step 2: Overview (Summary) -->
+            <div id="checkout-step-two" class="checkout-card hidden">
+                <div class="checkout-header">
+                    <h2>Order Overview</h2>
+                </div>
+                <div class="overview-details">
+                    <p class="overview-label">Item Total:</p>
+                    <p id="overview-items-price">$0.00</p>
+                    <p class="overview-label">Shipping (Standard):</p>
+                    <p>$4.99</p>
+                    <hr>
+                    <p class="overview-label font-large">Grand Total:</p>
+                    <p id="overview-grand-total" class="font-large font-glow">$0.00</p>
+                </div>
+                <div class="checkout-actions">
+                    <button type="button" class="btn btn-secondary" id="back-step-one-btn">Back</button>
+                    <button type="button" id="finish" class="btn btn-primary">Finish Order</button>
+                </div>
+            </div>
+
+            <!-- Checkout Step 3: Success -->
+            <div id="checkout-complete" class="checkout-card checkout-success-card hidden">
+                <div class="success-icon">
+                    <svg viewBox="0 0 24 24" width="80" height="80"><path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                </div>
+                <!-- Complete Header matched by Selenium Assertion -->
+                <h2 class="complete-header">Thank you for your order!</h2>
+                <p>Your accessories are being teleported to your coordinates.</p>
+                <button type="button" id="back-to-products-btn" class="btn btn-primary">Return to Store</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
