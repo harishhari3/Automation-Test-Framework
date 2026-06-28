@@ -1,14 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cosmic Goods - Anime, DC & Marvel Accessories Store</title>
-    <meta name="description" content="Shop premium keychains, rings, pendants, and replica props from Marvel, DC, and your favorite Anime. Premium quality, neon style.">
+    <meta name="description"
+        content="Shop premium keychains, rings, pendants, and replica props from Marvel, DC, and your favorite Anime. Premium quality, neon style.">
     <link rel="stylesheet" href="style.css">
     <!-- Premium Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
 </head>
+
 <body>
 
     <!-- 1. LOGIN SCREEN -->
@@ -18,7 +22,7 @@
                 <div class="logo-glow">COSMIC GOODS</div>
                 <p>ACCESSORIES MULTIVERSE</p>
             </div>
-            
+
             <form id="login-form" onsubmit="event.preventDefault();">
                 <div class="input-group">
                     <label for="user-name">Username</label>
@@ -28,15 +32,15 @@
                     <label for="password">Password</label>
                     <input type="password" id="password" placeholder="Enter password" required>
                 </div>
-                
+
                 <!-- Error message matching the expected Selenium element selector -->
                 <div id="error-message-container" class="error-container hidden">
                     <h3 data-test="error" id="error-text"></h3>
                 </div>
-                
+
                 <button type="submit" id="login-button" class="btn btn-primary">Enter Multiverse</button>
             </form>
-            
+
             <div class="credentials-hint">
                 <p><strong>Demo Access:</strong> standard_user / secret_sauce</p>
             </div>
@@ -48,13 +52,18 @@
         <header class="app-header">
             <div class="header-left">
                 <button id="react-burger-menu-btn" class="menu-btn">
-                    <svg viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/></svg>
+                    <svg viewBox="0 0 24 24" width="24" height="24">
+                        <path fill="currentColor" d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z" />
+                    </svg>
                 </button>
                 <h1 class="logo">COSMIC GOODS</h1>
             </div>
             <div class="header-right">
                 <a class="shopping_cart_link" id="cart-btn" href="javascript:void(0)">
-                    <svg viewBox="0 0 24 24" width="26" height="26"><path fill="currentColor" d="M17 18c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2zM7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zm0-3l1.1-2h7.45c.75 0 1.41-.41 1.75-1.03L21.7 4H5.21l-.94-2H1v2h2l3.6 7.59-1.35 2.44C4.52 15.37 5.48 17 7 17h12v-2H7z"/></svg>
+                    <svg viewBox="0 0 24 24" width="26" height="26">
+                        <path fill="currentColor"
+                            d="M17 18c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2zM7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zm0-3l1.1-2h7.45c.75 0 1.41-.41 1.75-1.03L21.7 4H5.21l-.94-2H1v2h2l3.6 7.59-1.35 2.44C4.52 15.37 5.48 17 7 17h12v-2H7z" />
+                    </svg>
                     <!-- Cart Badge element lookups -->
                     <span class="shopping_cart_badge hidden" id="cart-badge">0</span>
                 </a>
@@ -76,7 +85,7 @@
         <main class="store-main">
             <div class="store-subheader">
                 <h2 class="title">Products</h2>
-                
+
                 <div class="filter-controls">
                     <!-- Category Filter Tabs -->
                     <div class="category-filters">
@@ -132,7 +141,8 @@
             <div id="checkout-step-one" class="checkout-card">
                 <div class="checkout-header">
                     <h2>Checkout Information</h2>
-                    <button class="close-btn" onclick="document.getElementById('checkout-overlay').classList.add('hidden')">&times;</button>
+                    <button class="close-btn"
+                        onclick="document.getElementById('checkout-overlay').classList.add('hidden')">&times;</button>
                 </div>
                 <form id="checkout-form" onsubmit="event.preventDefault();">
                     <div class="input-group">
@@ -148,7 +158,8 @@
                         <input type="text" id="postal-code" placeholder="Enter zip code" required>
                     </div>
                     <div class="checkout-actions">
-                        <button type="button" class="btn btn-secondary" onclick="document.getElementById('checkout-overlay').classList.add('hidden')">Cancel</button>
+                        <button type="button" class="btn btn-secondary"
+                            onclick="document.getElementById('checkout-overlay').classList.add('hidden')">Cancel</button>
                         <button type="submit" id="continue" class="btn btn-primary">Continue</button>
                     </div>
                 </form>
@@ -159,7 +170,7 @@
                 <div class="checkout-header">
                     <h2>Order & Payment</h2>
                 </div>
-                
+
                 <div class="overview-details">
                     <p class="overview-label">Item Total:</p>
                     <p id="overview-items-price">$0.00</p>
@@ -191,19 +202,21 @@
                 <form id="payment-form" onsubmit="event.preventDefault();">
                     <div class="input-group">
                         <label for="card-number">Card Number</label>
-                        <input type="text" id="card-number" placeholder="4000 1234 5678 9010" value="4000 1234 5678 9010" maxlength="19" required>
+                        <input type="text" id="card-number" placeholder="4000 1234 5678 9010"
+                            value="4000 1234 5678 9010" maxlength="19" required>
                     </div>
                     <div class="input-row">
                         <div class="input-group">
                             <label for="card-expiry">Expiry Date</label>
-                            <input type="text" id="card-expiry" placeholder="MM/YY" value="12/29" maxlength="5" required>
+                            <input type="text" id="card-expiry" placeholder="MM/YY" value="12/29" maxlength="5"
+                                required>
                         </div>
                         <div class="input-group">
                             <label for="card-cvv">CVV</label>
                             <input type="password" id="card-cvv" placeholder="•••" value="123" maxlength="3" required>
                         </div>
                     </div>
-                    
+
                     <div class="checkout-actions">
                         <button type="button" class="btn btn-secondary" id="back-step-one-btn">Back</button>
                         <button type="submit" id="finish" class="btn btn-primary">
@@ -216,7 +229,10 @@
             <!-- Checkout Step 3: Success -->
             <div id="checkout-complete" class="checkout-card checkout-success-card hidden">
                 <div class="success-icon">
-                    <svg viewBox="0 0 24 24" width="80" height="80"><path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                    <svg viewBox="0 0 24 24" width="80" height="80">
+                        <path fill="currentColor"
+                            d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
+                    </svg>
                 </div>
                 <!-- Complete Header matched by Selenium Assertion -->
                 <h2 class="complete-header">Thank you for your order!</h2>
@@ -228,4 +244,5 @@
 
     <script src="app.js"></script>
 </body>
+
 </html>
